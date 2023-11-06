@@ -6,35 +6,25 @@ namespace SecondConvertor
         static void Main(string[] args)
         {
             var year = 31104000; var month = 2592000;var day = 86400;var hour = 3600;var minute = 60;
-            var iyear = 0; var imonth = 0; var iday = 0; var ihour = 0; var iminute = 0;
             Console.Write("Enter Seconds : ");
             int second = int.Parse(Console.ReadLine());
+            
+            var iyear = second/year;
+            var RemainSec = second % year;
 
-            while (second >= year) { 
-                 second -= year;
-                 iyear++;
-            }
-            while (second >= month && second < year)
-            {
-                second -= month;
-                imonth++;
-            }
-            while (second >= day && second < month)
-            {
-                second -= day;
-                iday++;
-            }
-            while (second >= hour && second < day)
-            {
-                second -= hour;
-                ihour++;
-            }
-            while (second >= minute && second < day)
-            {
-                second -= minute;
-                iminute++;
-            }
-            Console.WriteLine($"{iyear} Years , {imonth} Months , {iday} Days , {ihour} Hours , {iminute} Minutes , {second} Seconds");
+            var imonth = RemainSec / month;
+            RemainSec = RemainSec % month;
+
+            var iday = RemainSec / day;
+            RemainSec = RemainSec % day;
+
+            var ihour = RemainSec / hour;
+            RemainSec = RemainSec % hour;
+
+            var iminute = RemainSec / minute;
+            RemainSec = RemainSec % minute;
+
+            Console.WriteLine($"{iyear} Years , {imonth} Months , {iday} Days , {ihour} Hours , {iminute} Minutes , {RemainSec} Seconds");
         }
     }
 }
